@@ -100,7 +100,6 @@ return view('suaview',[
 ]);
 ```
 O resultado incluirá um botão de pesquisa avançada que quando clicado, exibirá o grid da seguinte maneira:
-https://s32.postimg.org/h54dn2u2t/Captura_de_tela_de_2016_08_01_12_23_24.png
 ![Imagem 2 - Pesquisa avançada](https://s32.postimg.org/98h570p45/Captura_de_tela_de_2016_08_01_12_12_19.png)
 
 ##Tratando ações em linha
