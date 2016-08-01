@@ -1,0 +1,1 @@
+Classe GRID para Laravel 5.
