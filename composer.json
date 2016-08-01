@@ -1,14 +1,14 @@
 {
     "name": "rafwell/laravel-grid",
-    "description": "Grid Laravel 5.",
+    "description": "Um componente simples para geração de grids poderosos com Laravel.",
     "authors": [{
         "name": "Rafael Alves",
         "email": "rafaotec@gmail.com"
-    }],
-    "license": "proprietary",
+    }],    
     "require": {
         "maatwebsite/excel": "~2.1.0"
     },
+    "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
             "Rafwell\\Grid\\": "src/"
