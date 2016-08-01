@@ -108,7 +108,7 @@
 								<td class="acoes">
 									@foreach ($linha['gridAcoes'] as $acao)	
 										@if($acao['metodo']=='GET')								
-											<a href="{!!$acao['url']!!}" title="{{$acao['titulo']}}" class="btn btn-xs acao btn-inverse">
+											<a href="{!!$acao['url']!!}" title="{{$acao['titulo']}}" class="btn btn-xs acao btn-default">
 												@if (isset($acao['icone']))
 													<span class="{{$acao['icone']}}"></span>
 												@endif
@@ -120,7 +120,7 @@
 											<form action="{!!$acao['url']!!}" method="POST" <?php echo ($acao['confirm']!==false ? 'onsubmit="if(!confirm(\''.addslashes(htmlentities($acao['confirm'])).'\')){event.preventDefault; return false;}; "' : '' ); ?> >
 												{{csrf_field()}}
 												<input type="hidden" name="_method" value="{!!$acao['metodo']!!}">
-												<button type="submit" title="{{$acao['titulo']}}" class="btn btn-xs acao btn-inverse">
+												<button type="submit" title="{{$acao['titulo']}}" class="btn btn-xs acao btn-default">
 													@if (isset($acao['icone']))
 														<span class="{{$acao['icone']}}"></span>
 													@endif

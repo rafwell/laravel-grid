@@ -47,12 +47,14 @@
 	float: right;
 }
 
-.grid-container .pesquisa-avancada .input-group-addon{
+.grid-container .pesquisa-avancada .input-group-addon,
+.grid-container .pesquisa-avancada .datetimepicker{
 	font-size: 12px;
 	color: #707478;
 }
 .grid-container .pesquisa-avancada .campos{	
     margin-left: -2.5px;
+    margin-bottom: 15px;
 }
 .grid-container .pesquisa-avancada .campos:after{
 	content: ' ';
@@ -63,6 +65,8 @@
 	float: left;
 	padding-left: 5px;	
 	width: 25%;
+	height: 60px;
+	margin-bottom: 10px;
 }
 .grid-container .pesquisa-avancada .campo.duplo{	
 	width: 50%;
@@ -85,7 +89,7 @@
 }
 .grid-container .pesquisa-avancada .campo.duplo .de .input.datetimepicker:before{
 	content: 'de:';
-    background-color: #e2e7eb;
+    background-color: #eee;
     position: absolute;
     z-index: 4;
     padding: 7px 8px 8px 8px;
@@ -95,11 +99,12 @@
     left: 1px;
     width: 37px;
     height: 32px;
+    border-right: 1px solid #ccc;
 }
 
 .grid-container .pesquisa-avancada .campo.duplo .ate .input.datetimepicker:before{
 	content: 'até:';
-	background-color: #e2e7eb;
+	background-color: #eee;
 	position: absolute;
 	z-index: 4;
 	padding: 7px 8px 8px 8px;
@@ -109,6 +114,7 @@
 	left: 1px;
 	width: 37px;
 	height: 32px;
+	border-right: 1px solid #ccc;
 }
 
 .grid-container .pesquisa-avancada form{
