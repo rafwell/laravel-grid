@@ -45,7 +45,8 @@ use Rafwell\Grid\Grid;
 ```
 Na sua função:
 ```
-$Grid = (new Grid(Cargo::query(), 'Cargos'))           
+//Cargo é um model para a tabela cargos.
+$Grid = (new Grid(Cargo::query(), 'CargosGridId'))           
     ->campos([
         'id'=>'Código',//id é a coluna no banco de dados e 'Código' é como ela será exibida na tela
         'descricao'=>'Descrição',
@@ -86,7 +87,8 @@ A visualização será semelhante a isto:
 No exemplo acima, ao realizar uma pesquisa na caixa de buscas todos os campos visíveis no grid são concatenados e pesquisados sob um like '%string%'. Na pesquisa avançada é possível pesquisar campo a campo, strings, inteiros, decimais, datas e horas, com a simples inclusão de uma chamada à função pesquisaAvancada:
 
 ```
-$Grid = (new Grid(Cargo::query(), 'Cargos'))           
+//Cargo é um model para a tabela cargos.
+$Grid = (new Grid(Cargo::query(), 'CargosGridId'))           
     ->campos([
         'id'=>'Código',//id é a coluna no banco de dados e 'Código' é como ela será exibida na tela
         'descricao'=>'Descrição',
