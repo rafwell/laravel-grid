@@ -2,14 +2,18 @@
 **rafwell/laravel-grid** é um componente para criação de grids poderosos, com poucas linhas de código. O componente está pronto para funcionar com seu projeto em Bootstrap 3, possui funcionalidades de exportação para Excel ou XLS, pesquisa avançada ou simples, ordenação e ações em linha ou em massa.
 
 ##Instalação
-1) Adicione ao seu composer.json: "rafwell/laravel-grid": "dev-master" e execute um composer install/update.
-2) Adicione ao seu config/app.php os seguintes providers:
+1. Adicione ao seu composer.json: "rafwell/laravel-grid": "dev-master" e execute um composer install/update.
+2. Adicione ao seu config/app.php os seguintes providers:
+    ```
     Rafwell\Grid\GridServiceProvider::class,
     Maatwebsite\Excel\ExcelServiceProvider::class
-   Adicione ao array de aliases:
+    ```
+    Adicione ao array de aliases:
+   ```
    'Excel'     => Maatwebsite\Excel\Facades\Excel::class,
-3) Execute: php artisan vendor:publish
-4) Inclua na sua view ou layout os arquivos js e css: 
+   ```
+3. Execute: ```php artisan vendor:publish```
+4. Inclua na sua view ou layout os arquivos js e css: 
 ```
 @if (isset($grid_css_files))
     @foreach($grid_css_files as $src)
