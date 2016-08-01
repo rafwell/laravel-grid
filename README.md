@@ -25,9 +25,9 @@
 ##JS e CSS requeridos
 Este pacote foi escrito para trabalhar com bootstrap 3 e Jquery. Utilizamos os seguintes auxiliares, que você deve ter em seu projeto, para correta utilização das funções do sistema:
 
-[Datetimepicker](https://eonasdan.github.io/bootstrap-datetimepicker/), para pesquisa avançada em campos date e datetime. 
-[Priceformat](http://jquerypriceformat.com/), para pesquisa avançada em campos money.
-[Fontawesome](http://fontawesome.io/), para icones.
+* [Datetimepicker](https://eonasdan.github.io/bootstrap-datetimepicker/), para pesquisa avançada em campos date e datetime. 
+* [Priceformat](http://jquerypriceformat.com/), para pesquisa avançada em campos money.
+* [Fontawesome](http://fontawesome.io/), para icones.
 
 Provavelmente você já tem esses componentes em seu sistema, pois são bem comuns em sistemas web.
 
