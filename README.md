@@ -80,7 +80,7 @@ A visualização será semelhante a isto:
 ![Imagem 1 - Grid simples](https://s32.postimg.org/98h570p45/Captura_de_tela_de_2016_08_01_12_12_19.png)
 
 ##Um exemplo um pouco mais completo
-No exemplo acima, ao realizar uma pesquisa na caixa de buscas todos os campos visíveis no grid são contatenados e pesquisados sob um like '%string%'. Na pesquisa avançada é possível pesquisar campo a campo, strings, inteiros, decimais, datas e horas, com a simples inclusão de uma chamada à função pesquisaAvancada:
+No exemplo acima, ao realizar uma pesquisa na caixa de buscas todos os campos visíveis no grid são concatenados e pesquisados sob um like '%string%'. Na pesquisa avançada é possível pesquisar campo a campo, strings, inteiros, decimais, datas e horas, com a simples inclusão de uma chamada à função pesquisaAvancada:
 
 ```
 $Grid = (new Grid(Cargo::query(), 'Cargos'))           
@@ -105,7 +105,7 @@ return view('suaview',[
 ]);
 ```
 O resultado incluirá um botão de pesquisa avançada que quando clicado, exibirá o grid da seguinte maneira:
-![Imagem 2 - Pesquisa avançada](https://s32.postimg.org/98h570p45/Captura_de_tela_de_2016_08_01_12_12_19.png)
+![Imagem 2 - Pesquisa avançada](https://s31.postimg.org/5fz5bpsdn/Captura_de_tela_de_2016_08_01_12_23_24.png)
 
 ##Tratando ações em linha
 Em alguns casos você pode não querer exibir alguma ação em uma determinada linha. Por exemplo, para um orçamento aprovado, você pode permitir sua exclusão. Para solucionar este cenário, temos a função trataLinha, que pode alterar elementos do grid, inclusive as ações. Esta função é chamada a cada linha e você pode fazer sua verificação e tomar as ações necessárias:
