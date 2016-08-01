@@ -3,7 +3,7 @@ namespace Rafwell\Grid;
 use Rafwell\Grid\GridController;
 use Illuminate\Http\Request;
 use DB;
-use Rafwell\Helpers\Helpers;
+use Rafwell\Grid\Helpers;
 use Carbon\Carbon;
 
 class Grid{
