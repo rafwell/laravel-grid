@@ -2,31 +2,15 @@
 **rafwell/laravel-grid** é um componente para criação de grids poderosos, com poucas linhas de código. O componente está pronto para funcionar com seu projeto em Bootstrap 3, possui funcionalidades de exportação para Excel ou XLS, pesquisa avançada ou simples, ordenação e ações em linha ou em massa.
 
 ##Instalação
-1. Adicione ao seu composer.json: "rafwell/laravel-grid": "dev-master" e execute um composer install/update.
-2. Adicione ao seu config/app.php os seguintes providers:
+1. Adicione ao seu composer.json: ```"rafwell/laravel-grid": "dev-master"``` e execute um ```composer update```.
+2. Adicione ao seu ```app/config/app.ph``` o seguinte provider:
     ```
-    Rafwell\Grid\GridServiceProvider::class,
-    Maatwebsite\Excel\ExcelServiceProvider::class
+    Rafwell\Grid\GridServiceProvider::class
     ```
-    Adicione ao array de aliases:
-   ```
-   'Excel'     => Maatwebsite\Excel\Facades\Excel::class,
-   ```
 3. Execute: ```php artisan vendor:publish```
-4. Inclua na sua view ou layout os arquivos js e css: 
-```
-@if (isset($grid_css_files))
-    @foreach($grid_css_files as $src)
-	   <link href="{!!$src!!}" rel="stylesheet">
-	@endforeach
-@endif
-@if (isset($grid_js_files))
-	@foreach($grid_js_files as $src)
-	    <script src="{!!$src!!}"></script>
-	@endforeach
-@endif
-```
-##JS e CSS requeridos
+4. Inclua na sua view ou layout os arquivos js e css. Aqui espero que você já tenha o bootstrap configurado e funcionando no seu ambiente. Este pacote já inclui a versão necessária de cada componente para perfeita utilização, para sua comodidade. Mas você pode usar o CDN do distribuidor se preferir.
+
+###JS e CSS de terceiros
 Este pacote foi escrito para trabalhar com bootstrap 3 e Jquery. Utilizamos os seguintes auxiliares, que você deve ter em seu projeto, para correta utilização das funções do sistema:
 
 * [Datetimepicker](https://eonasdan.github.io/bootstrap-datetimepicker/), para pesquisa avançada em campos date e datetime. 
@@ -34,6 +18,25 @@ Este pacote foi escrito para trabalhar com bootstrap 3 e Jquery. Utilizamos os s
 * [Fontawesome](http://fontawesome.io/), para icones.
 
 Provavelmente você já tem esses componentes em seu sistema, pois são bem comuns em sistemas web.
+####Arquivos JS
+```
+<!-- DEPENDÊNCIAS PARA RODAR LARAVEL-GRID - SÓ INCLUA SE AINDA NÃO ESTIVER USANDO-AS EM SEU PROJETO -->
+<script src="vendor/rafwell/data-grid/moment/moment.js"></script>
+<script type="text/javascript" src="vendor/rafwell/data-grid/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="vendor/rafwell/data-grid/priceformat/price_format.min.js"></script>
+
+<!-- JS LARAVEL-GRID -->
+<script src="vendor/rafwell/data-grid/js/data-grid.js"></script>
+```
+####Arquivos CSS
+```
+<!-- DEPENDÊNCIAS PARA RODAR LARAVEL-GRID - SÓ INCLUA SE AINDA NÃO ESTIVER USANDO-AS EM SEU PROJETO -->
+<link rel="stylesheet" href="vendor/rafwell/data-grid/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="vendor/rafwell/data-grid/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+
+<!-- CSS LARAVEL-GRID -->
+<link rel="stylesheet" href="vendor/rafwell/data-grid/css/data-grid.css">
+```
 
 ##Um exemplo simples
 No seu controller:
