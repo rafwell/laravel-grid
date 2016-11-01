@@ -7,7 +7,7 @@ foreach($campos as $campo=>$opts){
 		case 'text': ?>
 			<div class="campo {!!$campo!!} {!!isset($valorPesquisado[$campo]) && $valorPesquisado[$campo]!=='' ? 'pesquisado' : ''!!}">
 				<label>{!!$opts['rotulo']!!} <span class="remover"><span class="fa fa-remove"></span></span> </label>
-				<input type="text" name="pesquisar[][{!!$campo!!}]" value="{{$valorPesquisado[$campo]}}" class="form-control" />
+				<input type="text" name="pesquisar[][{!!$campo!!}]" value="{{$valorPesquisado[$campo]}}" class="form-control" placeholder="{{isset($opts['placeholder']) ? $opts['placeholder'] : ''}}"/>
 			</div>
 		<?php
 		break;
@@ -15,7 +15,7 @@ foreach($campos as $campo=>$opts){
 			<div class="campo {!!$campo!!} {!!isset($valorPesquisado[$campo]) && $valorPesquisado[$campo]!=='' ? 'pesquisado' : ''!!}">
 				<label>{!!$opts['rotulo']!!} <span class="remover"><span class="fa fa-remove"></span></label>
 				<select name="pesquisar[][{!!$campo!!}]" class="form-control">
-					<option value=""></option>					
+					<option value="">{{isset($opts['placeholder']) ? $opts['placeholder'] : ''}}</option>					
 					@foreach($opts['options'] as $value=>$label)					
 					<option value="{{$value}}" {!!isset($valorPesquisado[$campo]) && $valorPesquisado[$campo]!=='' && $valorPesquisado[$campo]==$value ? 'selected' : ''!!}>{{$label}}</option>
 					@endforeach

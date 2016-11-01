@@ -201,7 +201,7 @@ class Grid{
 				$k = substr($k, $strrpos+1);
 			}			
 
-			if(is_array($v) && isset($v['manual']) && $v['manual']===true)
+			if(is_array($v) && isset($v['where']) && $v['where']!==false)
 				continue;
 
 			$this->camposSelect[$k] = $k;
@@ -215,8 +215,11 @@ class Grid{
 				];
 			}
 
-			if(!isset($campo['manual']))
-				$campo['manual'] = false;
+			if(!isset($campo['where']))
+				$campo['where'] = false;
+			else{
+				$campo['somenteWhereSub'] = true;
+			}
 
 			if(!isset($campo['somenteWhereSub']))
 				$campo['somenteWhereSub'] = false;
@@ -232,6 +235,11 @@ class Grid{
 
 	public function ordemPadrao(array $ordem){		
 		$this->ordemPadrao[] = [$ordem[0], (isset($ordem[1]) ? $ordem[1] : 'asc')];		
+		return $this;
+	}
+
+	public function exibirRegistrosExcluidos($bool){
+		$this->exibirRegistrosExcluidos = $bool;
 		return $this;
 	}
 
@@ -251,12 +259,12 @@ class Grid{
 			foreach($this->acaoCampos as $campo){
 				$this->camposAdicionais[$campo] = $campo;
 			}
-		}			
+		}					
 
 		foreach($this->pesquisaAvancadaCampos as $campo=>$opts){
-			if($opts['manual']===true || $opts['somenteWhereSub']===true) continue;
+			if($opts['where']!==false || $opts['somenteWhereSub']===true) continue;
 				$this->camposAdicionais[$campo] = $campo;
-		}
+		}		
 
 		if(isset($this->camposAdicionais)){
 			foreach($this->camposAdicionais as $campoAdicional){
@@ -285,21 +293,6 @@ class Grid{
 
 		$this->query = $this->query->getModel()->newQuery();
 
-		if(method_exists($subQuery->getModel(), 'getQualifiedDeletedAtColumn')){
-			$posicaoDeletedAt = mb_strpos($subQuery->toSql(), '`'.$subQuery->getModel()->getTable().'`.`deleted_at` ');
-			if($posicaoDeletedAt!==false){
-				$deleted_at = mb_substr($subQuery->toSql(), $posicaoDeletedAt);
-				
-				if(mb_strpos($deleted_at, ' ')!==false){
-					//Algumas queries tem group by
-					$deleted_at = mb_substr($deleted_at, 0, mb_strpos($deleted_at, 'null')+4);				
-				}				
-
-				$subQuery->whereRaw($deleted_at);				
-			}
-			$this->query->withTrashed();
-		}
-
 		if($this->Request->grid==$this->id){
 			//Paginação
 			$this->paginaAtual = $this->Request->pagina ? $this->Request->pagina : 1;
@@ -324,7 +317,7 @@ class Grid{
 					}
 				}else{
 					//where busca avançada
-					for($i=0;$i<count($this->Request->pesquisar);$i++){
+					for($i=0;$i<count($this->Request->pesquisar);$i++){						
 
 						foreach($this->Request->pesquisar[$i] as $campo=>$valor){							
 							if($this->pesquisaAvancadaCampos[$campo]['somenteWhereSub']===true)
@@ -337,12 +330,13 @@ class Grid{
 							if(is_string($valor)){
 								$this->valorPesquisado[$campo] = $valor;
 
-								if($valor!=='' && $this->pesquisaAvancadaCampos[$campo]['manual']===false){	
+								if($valor!=='' && $this->pesquisaAvancadaCampos[$campo]['where']===false){	
 									if(is_string($this->pesquisaAvancadaCampos[$campo]) || $this->pesquisaAvancadaCampos[$campo]['tipo']=='text')
 										$queryBusca->where($campoAux, 'like', '%'.$valor.'%');
 									else									
 										$queryBusca->where($campoAux, $valor);
 								}
+								$valorTratado = $valor;
 							}else{
 								if(isset($valor['de']) && $valor['de']!=='')
 									$valorAux = $valor['de'];
@@ -374,25 +368,49 @@ class Grid{
 
 								if(isset($valor['de']) && $valor['de']!==''){
 									$this->valorPesquisado[$campo.'_de'] = $valorAux;
-									if($this->pesquisaAvancadaCampos[$campo]['manual']===false)
+									if($this->pesquisaAvancadaCampos[$campo]['where']===false)
 										$queryBusca->where($campoAux, '>=', $valorTratado);
 								}
 								
 								if(isset($valor['ate']) && $valor['ate']!==''){
 									$this->valorPesquisado[$campo.'_ate'] = $valorAux;
-									if($this->pesquisaAvancadaCampos[$campo]['manual']===false)
+									if($this->pesquisaAvancadaCampos[$campo]['where']===false)
 										$queryBusca->where($campoAux, '<=', $valorTratado);
 								}
+							}
+
+							if($this->pesquisaAvancadaCampos[$campo]['where']){								
+								call_user_func($this->pesquisaAvancadaCampos[$campo]['where'], $this, $queryBusca, $valorTratado, $campoAux);
 							}
 						}
 					}
 				}
-			}
+			}			
+
 			//Busca avançada
 			if($this->Request['pesquisa-avancada']) $this->pesquisaAvancadaAberta = true;
 		}		
+
+		if(method_exists($subQuery->getModel(), 'getQualifiedDeletedAtColumn')){
+			$posicaoDeletedAt = mb_strpos($subQuery->toSql(), '`'.$subQuery->getModel()->getTable().'`.`deleted_at` ');				
+			if($posicaoDeletedAt!==false && $this->exibirRegistrosExcluidos === false){					
+				$deleted_at = mb_substr($subQuery->toSql(), $posicaoDeletedAt);
+				
+				if(mb_strpos($deleted_at, ' ')!==false){
+					//Algumas queries tem group by
+					$deleted_at = mb_substr($deleted_at, 0, mb_strpos($deleted_at, 'null')+4);				
+				}				
+
+				$subQuery->whereRaw($deleted_at);									
+			}else{
+
+				$subQuery->withTrashed();
+			}
+
+			$this->query->withTrashed();
+		}
 		
-		$this->query->select('*');
+		$this->query->select('*');		
 		
 		$bindings2 = $subQuery->getBindings();
 		$bindings = $this->query->getBindings();
@@ -433,7 +451,6 @@ class Grid{
 			$this->query->skip(($this->paginaAtual-1)*$this->nrRegistrosPorPagina)->take($this->nrRegistrosPorPagina);
 
 		//executar query
-
 		
 		$linhas = $this->query->get()->toArray();
 		if($this->exportacao && ($this->Request->get('exportar')=='xls' || $this->Request->get('exportar')=='csv')){
