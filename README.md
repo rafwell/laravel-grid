@@ -144,4 +144,4 @@ Em alguns casos você pode não querer exibir alguma ação em uma determinada l
 ```
 ##License
 
-The MIT License (MIT). Please see License File for more information.
+The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
