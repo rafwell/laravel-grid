@@ -1,5 +1,4 @@
-<div class="grid-container">
-	
+<div class="grid-container" id="grid{{$id}}">
 	@if ($pesquisaAvancada && $pesquisaAvancadaAberta === true)
 		<div class="pesquisa pesquisa-avancada {{isset($valorPesquisado) && $valorPesquisado<>'' ? 'realizada' : ''}}">
 			<form action="{{$url}}" method="get">
@@ -148,6 +147,7 @@
 	@if (isset($linhas) && count($linhas)>0)
 	<div class="row">
 		<div class="col-md-{!! $totalPaginas>1 ? '9' : '12' !!}">	
+			@if($permiteExportacao)
 			<div class="input-group">				
 				<select name="exportar" class="form-control">
 					<option value="">Selecione um formato para exportação</option>
@@ -156,6 +156,7 @@
 				</select>
 				<a href="#" data-href="{{$urlExportacao}}" target="_blank" class="input-group-addon bt-exportar" title="Exportar"><span class="fa fa-download"></span> Exportar</a>
 			</div>		
+			@endif
 		</div>
 		<div class="col-md-3">
 			@if ($totalPaginas>1)

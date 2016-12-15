@@ -30,11 +30,14 @@ class Grid{
 	public $exportacao = true;
 	public $exibirRegistrosExcluidos = false;
 	public $ordemPadrao = []; //['campo', 'direcao']
+	private $driverName = '';
+	private $permiteExportacao = true;
 
 	function __construct($query, $id){
 		$this->query = $query;		
 		$this->id = $id;				
 		$this->Request = Request::capture();
+		$this->driverName = strtolower($this->query->getConnection()->getPdo()->getAttribute(\PDO::ATTR_DRIVER_NAME));
 		return $this;
 	}
 
@@ -227,6 +230,11 @@ class Grid{
 				
 		return $this;
 	}
+
+	public function permiteExportacao($bool){
+		$this->permiteExportacao = $bool;
+		return $this;
+	}
 	
 	public function exportacao($bool){
 		$this->exportacao = $bool;
@@ -247,12 +255,24 @@ class Grid{
 		$campos = $this->campos;		
 
 		$selectCampos = [];
+
 		
 		foreach($campos as $k=>$v){
 			if(strpos($v['campo'], ' ')!==false){
 				$v['campo'] = '('.$v['campo'].')';
-			}			
-			$selectCampos[] = $v['campo'].' as '.$v['alias'];
+			}
+			if($v['campo'] <> $v['alias']){
+				switch ($this->driverName) {
+					case 'odbc':
+						$selectCampos[] = $v['campo'].' as ['.$v['alias'].']';
+					break;
+					default:
+						$selectCampos[] = $v['campo'].' as '.$v['alias'];
+					break;
+				}				
+			}
+			else 
+				$selectCampos[] = $v['campo'];
 		}
 
 		if(isset($this->acaoCampos)){
@@ -307,11 +327,31 @@ class Grid{
 					foreach($this->campos as $campo=>$rotulo){
 						if($strrpos = strrpos($campo, '.'))
 							$campo = substr($campo, $strrpos+1);
-						$whereBusca.=",COALESCE($campo, '')";
+
+						switch ($this->driverName) {
+							case 'odbc':
+								$whereBusca.='+'.$campo;
+							break;
+							case 'sqlsrv':								
+								$whereBusca.="+COALESCE(CAST($campo AS NVARCHAR(MAX)), '')";
+							break;
+							default:
+								$whereBusca.=",COALESCE($campo, '')";
+							break;
+						}						
 					}
 
 					if($whereBusca){
-						$whereBusca = 'CONCAT('.substr($whereBusca, 1).')';						
+						switch ($this->driverName) {
+							case 'odbc':
+							case 'sqlsrv':
+								//sqlserver < 2012 não tem a função concat
+								$whereBusca = substr($whereBusca, 1);
+							break;
+							default:
+								$whereBusca = 'CONCAT('.substr($whereBusca, 1).')';
+							break;
+						}							
 						$this->query->where(DB::raw($whereBusca), 'like', '%'.$this->Request->pesquisar.'%');
 
 					}
@@ -448,7 +488,7 @@ class Grid{
 		}
 
 		if(!$this->exportacao || ($this->exportacao && ($this->Request->get('exportar')!='xls' && $this->Request->get('exportar')!='csv')))
-			$this->query->skip(($this->paginaAtual-1)*$this->nrRegistrosPorPagina)->take($this->nrRegistrosPorPagina);
+			$this->query->skip(($this->paginaAtual-1)*$this->nrRegistrosPorPagina)->take($this->nrRegistrosPorPagina);		
 
 		//executar query
 		
@@ -525,6 +565,7 @@ class Grid{
 	      'nrRegistrosPorPaginaDisponiveis'=>$this->nrRegistrosPorPaginaDisponiveis,
 	      'urlRegistrosPorPagina'=>$this->getUrl('registros-por-pagina'),
 	      'exportacao'=>$this->exportacao,
+	      'permiteExportacao'=>$this->permiteExportacao,
 	      'urlExportacao'=>$this->getUrl('urlExportacao')
 	    ]);
 	}
