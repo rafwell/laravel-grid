@@ -1,6 +1,9 @@
 ##Sobre o projeto
 **rafwell/laravel-grid** é um componente para criação de grids poderosos, com poucas linhas de código. O componente está pronto para funcionar com seu projeto em Bootstrap 3, possui funcionalidades de exportação para Excel ou XLS, pesquisa avançada ou simples, ordenação e ações em linha ou em massa.
 
+##Compatibilidade
+**rafwell/laravel-grid** é compatível com Laravel 5.2+
+
 ##Instalação
 1. Adicione ao seu composer.json: ```"rafwell/laravel-grid": "dev-master"``` e execute um ```composer update```.
 2. Adicione ao seu ```app/config/app.ph``` o seguinte provider:
@@ -111,15 +114,15 @@ $Grid = (new Grid(Produto::query(), 'ProdutoGridId'))
     ->acao('Editar', 'admin/produtos/{id}/edit') //Botão editar, entre chaves "{}" qualquer campo que foi utilizado acima, inclusive os calculados. Neste caso: id, descricao ou status
     ->acao('Excluir', 'admin/produtos/{id}', false, false, 'DELETE', 'Deseja realmente excluir este registro?')
     ->pesquisaAvancada([
-    	'id'=>['rotulo'=>'Código','tipo'=>'integer'],
-    	'created_at'=>['rotulo'=>'Data Criação','tipo'=>'date'],
-    	'descricao'=>['rotulo'=>'Descrição','tipo'=>'text'],
-    	'preco'=>['rotulo'=>'Preço','tipo'=>'money'],
-    	
+        'id'=>['rotulo'=>'Código','tipo'=>'integer'],
+        'created_at'=>['rotulo'=>'Data Criação','tipo'=>'date'],
+        'descricao'=>['rotulo'=>'Descrição','tipo'=>'text'],
+        'preco'=>['rotulo'=>'Preço','tipo'=>'money'],
+        
     ])->trataLinha(function($linha){
-    	$linha['created_at'] = date('d/m/Y', strtotime($linha['created_at']));
-    	//O campo preço está sendo formatado via mutators dentro do model Produto
-    	return $linha;
+        $linha['created_at'] = date('d/m/Y', strtotime($linha['created_at']));
+        //O campo preço está sendo formatado via mutators dentro do model Produto
+        return $linha;
     });
 
 return view('suaview',[
@@ -139,10 +142,6 @@ Em alguns casos você pode não querer exibir alguma ação em uma determinada l
     return $linha;
 })
 ```
-##Considerações finais
-Este pacote está em produção em diversos projetos que tenho trabalhado, há cerca de 6 meses e tem sido muito bem aceito.
-Darei atenção aos PRs e Issues que surgirem com a maior brevidade possível.
+##License
 
-Este foi um dos meus primeiros códigos sob laravel. Com certeza há algo para ser melhorado. Se você tem uma sugestão, envie um PR ou abra um Issue para discutirmos sobre a implementação.
-
-A documentação será feita a medida que o projeto for sendo aceito pela comunidade.
+The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
