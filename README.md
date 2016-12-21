@@ -5,7 +5,7 @@
 **rafwell/laravel-grid** é compatível com Laravel 5.2+
 
 ##Instalação
-1. Adicione ao seu composer.json: ```"rafwell/laravel-grid": "dev-master"``` e execute um ```composer update```.
+1. Adicione a dependência ao seu composer.json ```composer require "rafwell/laravel-grid"```.
 2. Adicione ao seu ```app/config/app.ph``` o seguinte provider:
     ```
     Rafwell\Grid\GridServiceProvider::class
