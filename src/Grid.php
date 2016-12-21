@@ -266,14 +266,14 @@ class Grid{
 					case 'odbc':
 						$selectCampos[] = $v['campo'].' as ['.$v['alias'].']';
 					break;
-					default:
+					default:						
 						$selectCampos[] = $v['campo'].' as '.$v['alias'];
 					break;
 				}				
 			}
 			else 
 				$selectCampos[] = $v['campo'];
-		}
+		}		
 
 		if(isset($this->acaoCampos)){
 			foreach($this->acaoCampos as $campo){
@@ -303,13 +303,12 @@ class Grid{
 				
 		for($i=0;$i<count($selectCampos);$i++){
 			$selectCampos[$i] = DB::raw($selectCampos[$i]);
-		}
-
-		$this->query->select($selectCampos);
+		}		
 			
 		//Cria a subquery
 		$bindings = $this->query->getBindings();
 		$subQuery = clone($this->query);
+		$subQuery = $subQuery->select($selectCampos);
 
 		$this->query = $this->query->getModel()->newQuery();
 
@@ -454,7 +453,7 @@ class Grid{
 		
 		$bindings2 = $subQuery->getBindings();
 		$bindings = $this->query->getBindings();
-		$bindings = array_merge($bindings2, $bindings);
+		$bindings = array_merge($bindings2, $bindings);		
 
 		$this->query->from( DB::raw('('.$subQuery->toSql().') '.$this->query->getModel()->getTable().' ') );
 
@@ -493,6 +492,7 @@ class Grid{
 		//executar query
 		
 		$linhas = $this->query->get()->toArray();
+
 		if($this->exportacao && ($this->Request->get('exportar')=='xls' || $this->Request->get('exportar')=='csv')){
 			array_unshift($linhas, $this->campos);
 			$excel = \App::make('excel');
