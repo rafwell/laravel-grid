@@ -7,7 +7,7 @@ foreach($campos as $campo=>$opts){
 		case 'text': ?>
 			<div class="campo {!!$campo!!} {!!isset($valorPesquisado[$campo]) && $valorPesquisado[$campo]!=='' ? 'pesquisado' : ''!!}">
 				<label>{!!$opts['rotulo']!!} <span class="remover"><span class="fa fa-remove"></span></span> </label>
-				<input type="text" name="pesquisar[][{!!$campo!!}]" value="{{$valorPesquisado[$campo]}}" class="form-control" placeholder="{{isset($opts['placeholder']) ? $opts['placeholder'] : ''}}"/>
+				<input type="text" name="pesquisar[][{!!$campo!!}]" value="{{isset($valorPesquisado[$campo]) ? $valorPesquisado[$campo] : ''}}" class="form-control" placeholder="{{isset($opts['placeholder']) ? $opts['placeholder'] : ''}}"/>
 			</div>
 		<?php
 		break;
