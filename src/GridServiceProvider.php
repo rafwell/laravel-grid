@@ -19,10 +19,10 @@ class GridServiceProvider extends ServiceProvider
             __DIR__.'/public' => public_path('vendor/rafwell/data-grid'),
         ]);
         view()->share('grid_css_files',[
-            'vendor/rafwell/data-grid/css/data-grid.css'
+            'vendor/rafwell/data-grid/css/data-grid.css?'.md5('vendor/rafwell/data-grid/css/data-grid.css')
         ]);        
         view()->share('grid_js_files',[
-            'vendor/rafwell/data-grid/js/data-grid.js'
+            'vendor/rafwell/data-grid/js/data-grid.js?'.md5('vendor/rafwell/data-grid/js/data-grid.js')
         ]);        
     }
 

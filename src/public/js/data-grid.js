@@ -3,9 +3,9 @@ $(document).ready(function(){
         window.location.href = $(this).attr('data-url')+'&pagina='+$(this).val();
     });
     $('.grid-container .bt-limpar-pesquisa').click(function(){  
-        var $clone = $(this).closest('form').clone();
-        $clone.find('[name=pesquisar]').remove();
-        $clone.submit();
+        var $form = $(this).closest('form');
+        $form.find('[name=pesquisar]').val('');        
+        $form.submit();
     }); 
 
     $('.grid input[type="checkbox"].selecionar-todos').click(function(){

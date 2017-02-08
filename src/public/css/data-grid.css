@@ -193,3 +193,7 @@
 .grid-container .bt-exportar{
 	text-decoration: none;	
 }
+
+.grid-container .pesquisa.pesquisa-simples{
+	width: auto;
+}
