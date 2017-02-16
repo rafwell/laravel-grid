@@ -442,11 +442,13 @@ class Grid{
 
 				$subQuery->whereRaw($deleted_at);									
 			}else{
-
 				$subQuery->withTrashed();
 			}
-
 			$this->query->withTrashed();
+		}
+
+		if($removedScopes = $subQuery->removedScopes()){
+			$this->query->withoutGlobalScopes($removedScopes);
 		}
 		
 		$this->query->select('*');		
