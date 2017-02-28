@@ -1,6 +1,11 @@
 ##Sobre o projeto
 **rafwell/laravel-grid** é um componente para criação de grids poderosos, com poucas linhas de código. O componente está pronto para funcionar com seu projeto em Bootstrap 3, possui funcionalidades de exportação para Excel ou XLS, pesquisa avançada ou simples, ordenação e ações em linha ou em massa.
 
+##Good news!
+A new version of this package is comming! The new version will be support multi-language features to expad our limits! If you're anxious like us, contribute with the development sounds good. Follow the changes on the new repository: [rafwell/laravel-easygrid](https://github.com/rafwell/laravel-easygrid). This one repository will be descontinued when the new is ready for production apps. All current features will be work on the new version, small modifications on structure (for best use) and the code will be rewriten to english. With this, it will not be possible to maintain a compatibility between the current and the new. However, because it is another repository, and another namespace, you can work with the two simultaneously, performing the migration smoothly.
+
+Boas notícias - Uma nova versão deste pacote está chegando! A nova versão será compatível com vários recursos de linguagem para expandir nossos limites! Se você está ansioso como nós, pense em contribuir para o desenvolvimento. Siga as alterações no novo repositório: [rafwell / laravel-easygrid] (https://github.com/rafwell/laravel-easygrid). Este repositório será descontinuado quando o novo estiver pronto para aplicações de produção. Todos os recursos atuais serão incluidos na nova versão, pequenas modificações na estrutura (para melhor uso) e o código será reescrito para o inglês. Com isto, não será possível manter uma compatibilidade entre o atual e o novo. Porém, por se tratar de outro repositório, e outro namespace, você poderá trabalhar com os dois simultaneamente, realizando a migração de maneira suave.
+
 ##Compatibilidade
 **rafwell/laravel-grid** é compatível com Laravel 5.2+
 
