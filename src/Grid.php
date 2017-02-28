@@ -526,7 +526,7 @@ class Grid{
 	          if(strpos($acao['url'], '{')!==false){
 	            //Existe variável para substituir na url
 	            foreach($linhas[$i] as $campo=>$valor){   
-	              if($campo<>'gridAcoes')
+	              if($campo<>'gridAcoes' && (is_string($valor) || is_numeric($valor)))
 	                $acao['url'] = str_replace('{'.$campo.'}', $valor, $acao['url']);
 	            }           
 	          }
