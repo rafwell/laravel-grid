@@ -1,16 +1,16 @@
-##Sobre o projeto
+## Sobre o projeto
 **rafwell/laravel-grid** é um componente para criação de grids poderosos, com poucas linhas de código. O componente está pronto para funcionar com seu projeto em Bootstrap 3, possui funcionalidades de exportação para Excel ou XLS, pesquisa avançada ou simples, ordenação e ações em linha ou em massa.
 
-##Aviso legal
+## Aviso legal
 Uma nova versão deste pacote foi lançada, em um repositório separado para que você possa rodar os dois em simultâneo e realizar a migraço da maneira mais suave possível. Na nova versão temos suporte para multi-idioma e o código fonte está 100% em inglês. Novas funcionalidades só serão incluídas no novo repositório, deixando este depreciado. Este é o link [rafwell/laravel-simplegrid](https://github.com/rafwell/laravel-simplegrid).
 
-##Disclaimer
+## Disclaimer
 A new version of this package will released! The new version support multi-language features to expand our limits! This one repository was descontinued when the new is ready. All current features will be work on the new version, small modifications on structure (for best use) and the code will be rewriten to english. With this, it will not be possible to maintain a compatibility between the current and the new. However, because it is another repository, and another namespace, you can work with the two simultaneously, performing the migration smoothly. Here's the link for the new repository [rafwell/laravel-simplegrid](https://github.com/rafwell/laravel-simplegrid).
 
-##Compatibilidade
+## Compatibilidade
 **rafwell/laravel-grid** é compatível com Laravel 5.2+
 
-##Instalação
+## Instalação
 1. Adicione a dependência ao seu composer.json ```composer require "rafwell/laravel-grid"```.
 2. Adicione ao seu ```app/config/app.ph``` o seguinte provider:
     ```
@@ -19,7 +19,7 @@ A new version of this package will released! The new version support multi-langu
 3. Execute: ```php artisan vendor:publish```
 4. Inclua na sua view ou layout os arquivos js e css. Aqui espero que você já tenha o bootstrap configurado e funcionando no seu ambiente. Este pacote já inclui a versão necessária de cada componente para perfeita utilização, para sua comodidade. Mas você pode usar o CDN do distribuidor se preferir.
 
-###JS e CSS de terceiros
+### JS e CSS de terceiros
 Este pacote foi escrito para trabalhar com bootstrap 3 e Jquery. Utilizamos os seguintes auxiliares, que você deve ter em seu projeto, para correta utilização das funções do sistema:
 
 * [Datetimepicker](https://eonasdan.github.io/bootstrap-datetimepicker/), para pesquisa avançada em campos date e datetime. 
@@ -27,7 +27,7 @@ Este pacote foi escrito para trabalhar com bootstrap 3 e Jquery. Utilizamos os s
 * [Fontawesome](http://fontawesome.io/), para icones.
 
 Provavelmente você já tem esses componentes em seu sistema, pois são bem comuns em sistemas web.
-####Arquivos JS
+#### Arquivos JS
 ```
 <!-- DEPENDÊNCIAS PARA RODAR LARAVEL-GRID - SÓ INCLUA SE AINDA NÃO ESTIVER USANDO-AS EM SEU PROJETO -->
 <script src="vendor/rafwell/data-grid/moment/moment.js"></script>
@@ -37,7 +37,7 @@ Provavelmente você já tem esses componentes em seu sistema, pois são bem comu
 <!-- JS LARAVEL-GRID -->
 <script src="vendor/rafwell/data-grid/js/data-grid.js"></script>
 ```
-####Arquivos CSS
+#### Arquivos CSS
 ```
 <!-- DEPENDÊNCIAS PARA RODAR LARAVEL-GRID - SÓ INCLUA SE AINDA NÃO ESTIVER USANDO-AS EM SEU PROJETO -->
 <link rel="stylesheet" href="vendor/rafwell/data-grid/font-awesome/css/font-awesome.min.css">
@@ -47,7 +47,7 @@ Provavelmente você já tem esses componentes em seu sistema, pois são bem comu
 <link rel="stylesheet" href="vendor/rafwell/data-grid/css/data-grid.css">
 ```
 
-##Um exemplo simples
+## Um exemplo simples
 No seu controller:
 ```
 use Rafwell\Grid\Grid;
@@ -101,7 +101,7 @@ Finalmente, exiba o grid na sua view:
 A visualização será semelhante a isto:
 ![Imagem 1 - Grid simples](https://s31.postimg.org/5me80xvrf/Captura_de_tela_de_2016_08_01_20_23_54.png)
 
-##Um exemplo um pouco mais completo
+## Um exemplo um pouco mais completo
 No exemplo acima, ao realizar uma pesquisa na caixa de buscas todos os campos visíveis no grid são concatenados e pesquisados sob um like '%string%'. Na pesquisa avançada é possível pesquisar campo a campo, strings, inteiros, decimais, datas e horas, com a simples inclusão de uma chamada à função pesquisaAvancada.
 
 ```
@@ -138,7 +138,7 @@ return view('suaview',[
 O resultado incluirá um botão de pesquisa avançada que quando clicado, exibirá o grid da seguinte maneira:
 ![Imagem 2 - Pesquisa avançada](https://s32.postimg.org/5k1ncfw11/Captura_de_tela_de_2016_08_01_20_21_04.png)
 
-##Tratando ações em linha
+## Tratando ações em linha
 Em alguns casos você pode não querer exibir alguma ação em uma determinada linha. Por exemplo, para um orçamento aprovado, você pode permitir sua exclusão. Para solucionar este cenário, temos a função trataLinha, que pode alterar elementos do grid, inclusive as ações. Esta função é chamada a cada linha e você pode fazer sua verificação e tomar as ações necessárias:
 ```
 ->trataLinha(function($linha){
@@ -148,6 +148,6 @@ Em alguns casos você pode não querer exibir alguma ação em uma determinada l
     return $linha;
 })
 ```
-##License
+## License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
