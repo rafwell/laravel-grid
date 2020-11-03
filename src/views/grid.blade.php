@@ -148,7 +148,7 @@
 	<div class="row">
 		<div class="col-md-{!! $totalPaginas>1 ? '9' : '12' !!}">	
 			@if($permiteExportacao)
-			<div class="input-group">				
+			<div class="input-group hide">				
 				<select name="exportar" class="form-control">
 					<option value="">Selecione um formato para exportação</option>
 					<option value="xls">XLS</option>
